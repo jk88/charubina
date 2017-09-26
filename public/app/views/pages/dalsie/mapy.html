@@ -1,0 +1,192 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Charubina | Oznamy</title>
+	<link rel="icon" href="favicon.ico" type="image/x-icon" />
+	
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+	
+	<!-- override bootstrap -->
+	<link href="css/override.css" rel="stylesheet">
+	
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body ng-app="mapp" ng-controller="mctrl">
+  
+	<!-- HEADER ---------------------------------------------------------------------------------->
+		<!-- SLIDER ----------------------->
+			<div id="carousel-example-generic" class="carousel slide hidden-xs" data-ride="carousel">
+			  <!-- Indicators -->
+			  <ol class="carousel-indicators">
+				<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+				<li data-target="#carousel-example-generic" data-slide-to="1"></li>
+				<li data-target="#carousel-example-generic" data-slide-to="2"></li>
+			  </ol>
+			 
+			  <!-- Wrapper for slides -->
+			  <div class="carousel-inner">
+				<div class="item active">
+				  <div style="background:url(upload/fotky/s0.jpg) center center; background-size:cover;" class="slider-size"></div>
+				  <div class="carousel-caption">
+					  <h3></h3>
+				  </div>
+				</div>
+				<div class="item">
+				  <div style="background:url(upload/fotky/s1.jpg) center center; background-size:cover;" class="slider-size"></div>
+				  <div class="carousel-caption">
+					  <h3></h3>
+				  </div>
+				</div>
+				<div class="item">
+				  <div style="background:url(upload/fotky/s2.jpg) center center; background-size:cover;" class="slider-size"></div>
+				  <div class="carousel-caption">
+					  <h3></h3>
+				  </div>
+				</div>
+			  </div>
+			 
+			  <!-- Controls -->
+			  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+				<span class="glyphicon glyphicon-chevron-left"></span>
+			  </a>
+			  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+				<span class="glyphicon glyphicon-chevron-right"></span>
+			  </a>
+			</div>
+		<!----/slider ---------------------------->
+	  
+	  <!---- NAVIGATION BAR ---------------------->
+		
+		  <nav class="navbar navbar-default">
+		  <div class="container-fluid">
+			<div class="navbar-header">
+			  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+			  </button>
+			  <a class="navbar-brand" href="index.html">Charubina</a>
+			</div>
+
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			  <ul class="nav navbar-nav">
+				<!-- aktualna polozka vybrata v menu -->
+				<li><a href="index.html">Oznamy</a></li>
+				
+				<li><a href="kniha-navstev.html">Kniha návštev</a></li>
+				<li><a href="zapis-ulovku.html">Úlovky a výstrely</a></li>	
+				<li class="dropdown active">
+				  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Ostatné <span class="caret"></span></a>
+				  <ul class="dropdown-menu" role="menu">
+					<li><a href="mapy.html">Mapy</a></li>
+					<li><a href="kontakty.html">Kontakty</a></li>
+					<li><a href="#">Fotky</a></li>
+					<li><a href="#">Dokumenty</a></li>
+					<li class="divider"></li>
+					<li><a href="#">Možnosti</a></li>
+				  </ul>
+				</li>
+			  </ul>
+			  
+				<form class="navbar-form navbar-left" role="search">
+					<div class="form-group">
+						<input type="text" class="form-control" placeholder="Vyhľadaj">
+					</div>
+					<button type="submit" class="btn btn-default">Potvrď</button>
+				</form>
+			  
+			  <ul class="nav navbar-nav navbar-right">
+				<li><a href="#">Upraviť profil</a></li>
+				<li><a href="#">Administrácia</a></li>
+				<li><a href="#">Odhlásenie</a></li>
+			  </ul>
+			</div>
+			</div>
+			</nav>
+		
+		<!---/navigation bar --------------------->
+	<!---/header---------------------------------------------------------------------------------->
+	
+	<!-- DIV CONTENT CONTAINER ----------------------------->
+	<div class="container">
+	<div class="row">
+		
+		<!-- STLPEC VLAVO ----------------------------------------->
+		<div class="col-md-4">
+		
+			<!-- Jumbotron domaci poriadok download --
+			<div class="jumbotron">
+				<h1>Vitajte</h1>
+				<p>Poľovný spolok Charubina v snahe zabezpečiť plnenie všetkých povinností v poľovnom revíri Grúň vydáva Domáci poriadok,  nižšie dostupný k stiahnutiu.</p>
+				<p><a class="btn btn-primary btn-lg">Stiahnuť</a></p>
+			</div>
+			------/jumbotron -------------------------------------->
+		
+			<div class="well">
+				<h2>Ostatné</h2>
+				</br>
+				<p> <a href="upload/dokumenty/a.pdf" target="_blank">Lokality, nočný lov diviačej zvery</a></p>
+				</br>
+				<p> <a href="upload/dokumenty/kartomapa1.jpg" target="_blank">Kartomapa s vyznačenými lokalitami</a></p>
+				</br>
+				<p><a href="upload/dokumenty/orto.pdf" target="_blank">Satelitná mapa s hranicami </a></p>
+				</br>
+				<p><a href="http://lvu.nlcsk.org/polovgis/Mapa.aspx" target="_blank">Polovnícky GIS</a></p>
+
+			</div>
+		</div>
+		<!--/stlpec vlavo----------------------------------------->
+		
+		<!-- STLPEC VPRAVO ----------------------------------------->
+		<div class="col-md-8">
+		
+			<h2>Mapa</h2>
+				</br>
+			
+				<div class="map_container">
+					<div id="map_canvas" class="map_canvas">
+						<iframe src="https://www.google.com/maps/embed?pb=!1m13!1m11!1m3!1d17498.177309732942!2d18.607406999999988!3d49.091068!2m2!1f0!2f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1ssk!2ssk!4v1439402134537" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+					</div>
+				</div>
+			
+			
+			</br>
+			<a id="idnahor" class="pull-right" href="#carousel-example-generic">Nahor</a>
+			</br>
+			</br>
+		</div>
+		<!--/stlpec vpravo----------------------------------------->
+		
+	</div>
+	</div>
+	<!----/div content container ------------------------------------------>
+	
+	<!---- FOOTER -------------------------------------------------------------------->
+		<footer class="footer">
+			<div class="container">
+				<p><span class="pull-right">&copy; 2015 | Kodware</span></p>
+			</div>
+		</footer>
+	<!----/footer-------------------------------------------------------------------->
+	
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="js/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+	<!-- angular 1.4 -->
+	<script src="js/angular.min.js"></script>
+	<!-- angular MODAL FORM MODULE -->
+	<script src="js/angular-modal-service.min.js"></script>
+	<!-- moj skript, angular KONTROLERY -->
+	<script src="js/script.js"></script>
+  </body>
+</html>

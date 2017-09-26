@@ -1,0 +1,9 @@
+connection string do databazy je v config.js (pouziva sa tam db ktoru vytvoril priamo autor tutorialu (naplnena datami z tutorialu)): "mongodb://root:abc123@ds045031.mongolab.com:45031/userstory"
+
+
+Prihlasovacie udaje do vlastnej free mongo databazy cez sluzbu mongolab.com:
+Account name: charubinadb
+Username: charubinausr
+Email: jurajkostka.sk@gmail.com
+Password: heslocharubina1
+connection string: "mongodb://root:abc123@ds033153.mongolab.com:33153/userstorydb"

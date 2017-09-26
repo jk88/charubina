@@ -1,0 +1,236 @@
+
+<div ng-controller="MainController as main">
+
+<div class="jumbotron text-center" ng-if="!main.loggedIn">
+	
+	<div>
+		<h1>Vitajte v aplikácii Charubina</h1>
+	</div>
+
+	<div>
+		<p>Pre pokračovanie sa prihláste</p>
+		<a href="/login" class="btn btn-primary">Prihlásenie</a>
+	</div>
+</div>
+
+
+
+<div class="row" ng-if="main.loggedIn">
+
+	<!-- STLPEC VLAVO --------------------------------------- -->
+		<div class="col-md-4">
+		
+			<!-- Jumbotron domaci poriadok download --
+			<div class="jumbotron">
+				<h1>Vitajte</h1>
+				<p>Poľovný spolok Charubina v snahe zabezpečiť plnenie všetkých povinností v poľovnom revíri Grúň vydáva Domáci poriadok,  nižšie dostupný k stiahnutiu.</p>
+				<p><a class="btn btn-primary btn-lg">Stiahnuť</a></p>
+			</div>
+			------/jumbotron ------------------------------------ -->
+		
+			<div class="well">
+				<h2>Vitajte</h2>
+				<p>Poľovný spolok Charubina v snahe zabezpečiť plnenie všetkých povinností v poľovnom revíri Grúň vydáva 
+				<strong>Domáci poriadok</strong>,  nižšie dostupný k stiahnutiu.</p>
+				</br>
+				<p><a href="upload/dokumenty/domaci-poriadok-ps1-2.pdf" class="btn btn-primary">Stiahnuť</a></p>
+			</div>
+		</div>
+		<!--/stlpec vlavo--------------------------------------- -->
+		
+		<!-- STLPEC VPRAVO --------------------------------------- -->
+		<div class="col-md-8">
+			<h2>Interné oznamy</h2>
+
+			<button ng-if="main.loggedAdmin" type="button" class="btn btn-primary" data-toggle="collapse" data-target="#divformskryty">Pridaj oznam</button>
+				</br>
+				</br>
+			
+				<div id="divformskryty" class="collapse">
+				</br>
+				<form name="picaForm" class="form-horizontal" ng-submit="main.createOznamy()">
+				  <fieldset>
+					<div class="form-group">
+
+					  <label for="inputEmail" class="col-lg-2 control-label">Nadpis</label>
+					  <div class="col-lg-10">
+						<input type="text" class="form-control" id="inputEmail" ng-model="main.oznamyData.titulok" placeholder="Nadpis oznamu">
+
+					  </div>
+
+
+					  <label for="inputEmail" class="col-lg-2 control-label">Text</label>
+					  <div class="col-lg-10">	
+						<!--<textarea type="text" name="Text1" class="form-control" cols="40" ng-model="textH" rows="5" placeholder="Text oznamu"></textarea>-->
+						<!--<div text-angular ng-model="htmlVariable" ta-toolbar-class="btn-toolbar" ta-toolbar-group-class="btn-group" ta-toolbar-button-class="btn btn-default" ta-toolbar-button-active-class="active" placeholder="Text oznamu"></div>-->
+
+
+						<!--<div text-angular ta-target-toolbars="toolbar" ng-model="main.oznamyData.text"></div>
+						<div text-angular-toolbar class="toolbar" name="toolbar"></div>-->
+
+						 <div text-angular="text-angular" ng-model="main.oznamyData.text" ta-toolbar="
+						 [['h1','h2', 'h3', 'bold','underline','italics', 'p','ul','ol', 'justifyLeft', 'justifyCenter', 'justifyRight', 'quote', 'insertImage','insertLink','html']]">
+						 </div>
+
+
+					  </div>	
+					  </div 				 
+					</div>
+					
+					<div class="form-group">
+					  <div class="col-lg-10 col-lg-offset-2">
+						<button type="reset" class="btn btn-default" ng-click="main.oznamyData.text=''">Vymaž</button>
+						<button type="submit" class="btn btn-primary" data-toggle="collapse" data-target="#divformskryty">Potvrď</button>
+					  </div>
+					</div>
+				  </fieldset>
+				</form>
+				</div>
+			
+			
+			
+			
+			</br>
+			<div class="panel panel-default" ng-show="$index != selectedRow" ng-repeat-start="each in main.oznamies | reverse">
+				<div class="panel-heading">{{each.titulok}}
+					<button class="btn btn-xs pull-right" ng-if="main.loggedAdmin" ng-click="main.setClickedRow($index, each)">
+						<span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Edit
+					</button>
+					<div class="pull-right">&nbsp;</div>
+					<button class="btn btn-xs pull-right" ng-if="main.loggedAdmin" ng-click="main.vymaz($index, each)">
+						<span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Zmaž
+					</button>
+				</div>
+				<div class="panel-body">
+					<p ng-bind-html="each.text"></p>
+				</div>
+			</div>
+			<div ng-repeat-end="" ng-show="$index == selectedRow">
+				<!-- ---------------------------- -->
+				<div class="panel panel-default">
+  				<div class="panel-body">
+				<form name="picaForm" class="form-horizontal" ng-submit="main.save(each)">
+				  <fieldset>
+					<div class="form-group">
+
+					  <label for="inputEmail" class="col-lg-2 control-label">Nadpis</label>
+					  <div class="col-lg-10">
+						<input type="text" class="form-control" id="inputEmail" ng-model="main.casSelected" placeholder="Nadpis oznamu">
+
+					  </div>
+
+
+					  <label for="inputEmail" class="col-lg-2 control-label">Text</label>
+					  <div class="col-lg-10">	
+						<!--<div text-angular ta-target-toolbars="toolbar2" ng-model="main.lokalitaSelected"></div>
+						<div text-angular-toolbar class="toolbar" name="toolbar2"></div>-->
+						<div text-angular="text-angular" ng-model="main.lokalitaSelected" ta-toolbar="
+						 [['h1','h2', 'h3', 'bold','underline','italics', 'p','ul','ol', 'justifyLeft', 'justifyCenter', 'justifyRight', 'quote', 'insertImage','insertLink','html']]">
+						 </div>	
+					  </div>	
+					  </div 				 
+					</div>
+					
+					<div class="form-group">
+					  <div class="col-lg-10 col-lg-offset-2">
+						<button type="reset" class="btn btn-default" ng-click="main.zrus()">Zruš</button>
+						<button type="submit" class="btn btn-primary">Potvrď</button>
+					  </div>
+					</div>
+				  </fieldset>
+				</form>
+				</div>
+				</div>
+				<!-- ---------------------------- -->
+			</div>
+			
+
+			<!-- 
+			<div class="panel panel-default">
+				<div class="panel-heading">Dohľadávky / PUP psy</div>
+				<div class="panel-body">
+					<p><strong>Ján Janek</strong> 0905 213 073 : diviačia zver</p>
+					<p><strong>Jozef Skorčík</strong> 0910 409 705 : škodná, diviačia zver</p>
+					<p><strong>Michal Kováčik</strong> 0902 339 718 : srnčia zver,diviačia zver</p>
+					<p><strong>Piala Tomáš</strong> 0908 584 811 : jelenia zver</p>
+					<p><strong>Jaroslav Chabada</strong> 0948 191 849: jelenia zver, diviačia zver</p>
+				</div>
+			</div>
+			
+			<div class="panel panel-default">
+				<div class="panel-heading">Dohľadávky / PUP psy</div>
+				<div class="panel-body">
+					<p><strong>Ján Janek</strong> 0905 213 073 : diviačia zver</p>
+					<p><strong>Jozef Skorčík</strong> 0910 409 705 : škodná, diviačia zver</p>
+					<p><strong>Michal Kováčik</strong> 0902 339 718 : srnčia zver,diviačia zver</p>
+					<p><strong>Piala Tomáš</strong> 0908 584 811 : jelenia zver</p>
+					<p><strong>Jaroslav Chabada</strong> 0948 191 849: jelenia zver, diviačia zver</p>
+				</div>
+			</div>
+			
+			<div class="panel panel-default">
+				<div class="panel-heading">Tlačivá na stiahnutie - VZORKY DIVIAK</div>
+				<div class="panel-body">
+					<p><a href="upload/dokumenty/10-ld-20-01.pdf" target="_blank">pdf súbor / print - trichinela</a></p>
+					<p><a href="upload/dokumenty/iadanka-na-lab.-vysetrenie.doc.xlsx" target="_blank">docx súbor / print - KMO</a></p>
+				</div>
+			</div>
+			
+			<div class="panel panel-default">
+				<div class="panel-heading">Obhliadači ulovenej zveri pre PR Grúň</div>
+				<div class="panel-body">
+					<p><strong>V/M Čierna:</strong> Peter Papala - 0908 803 848, Jozef Filo - 0918 643 438</p>
+					<p><strong>Jasenové:</strong> Ján Gažúr - 0904 567 995, Ján Janek - 0905 213 073</p>
+					<p><strong>Rajec:</strong> Ján Gažúr - 0904 567 995 Vladimír Patúš - 0918 591 528, Jaroslav Chabada - 0948 191 849</p>					
+				</div>
+			</div>
+			
+			<div class="panel panel-default">
+				<div class="panel-heading">Zakázané spôsoby lovu</div>
+				<div class="panel-body">
+					<p><strong>Zákaz používať- § 65 Zakázané spôsoby lovu - c) používanie zakázaných puškových ďalekohľadov - infrazameriavačov, noktovízorov, laserových zameriavačov, zameriavačov so zosilnením svetla, ktoré sú prispôsobené na videnie v noci</strong></p>	
+					<p><strong>Pri nedodržaní bude poľovníkovi pozastavený výkon práva poľovníctva</strong></p>				
+				</div>
+			</div>
+					
+			<div class="panel panel-default">
+				<div class="panel-heading">Doba lovu zveri</div>
+				<div class="panel-body">
+					<p>- srnec hôrny od 16.mája do 30.septembra, srna a srnča od 1.septembra do 31.decembra</p>
+					<p>- jeleň európsky a jelenča od 1.augusta do 15.januára, jelenica od 1.augusta do 30.novembra</p>
+					<p>- diviak lesný a diviačica od 1.júla do 31.decembra, diviača a lanštiak po celý rok</p>
+					<p>- líška hrdzavá, medvedík čistotný, psík medvedíkovitý a nutria riečna celoročne</p>
+					<p>- kuna lesná, kuna skalná a tchor tmavý od 1.septembra do konca februára</p>
+					<p>- jazvec lesný od 1.septembra do 30.novembra</p>
+					<p>- ondatra pižmová od 1.októbra do 15.apríla</p>
+					<p>- kačica divá od 1.septembra do 31.januára</p>
+					<p>- hus divá, poľná a bieločelá od 1.októbra do 31.januára</p>
+					<p>- havran čierny, sojka škriekavá, straka čiernozobá a vrana túlavá od 1.júna do konca februára</p>
+					<p>- holub hrivnák od 1.augusta do 31.októbra, hrdlička záhradná od 1.augusta do 31.decembra</p>
+				</div>
+			</div>
+			
+			<div class="panel panel-default">
+				<div class="panel-heading">Etický kódex poľovníka</div>
+				<div class="panel-body">
+					<p>Článok 1<br />Poľovník pozná, ovláda, ctí a dodržiava právne predpisy upravujúce poľovníctvo v Slovenskej republike a v Európskej únii.</p>
+					<p>Článok 2<br />Poľovník si ctí, v praxi dodržiava a rozširuje všetky zvyky a tradície súvisiace s poľovníctvom a lovom.</p>
+					<p>Článok 3<br />Poľovník sa trvale vzdeláva a poznávanie prírody chápe ako svoju vnútornú potrebu.</p>
+					<p>Článok 4<br />Poľovník dbá na práva a oprávnené záujmy ostatných poľovníkov a na práva a oprávnené záujmy celej spoločnosti.</p>
+					<p>Článok 5<br />Poľovník dbá o mravnú čistotu poľovníckej komory a správa sa tak, aby mohol byť vzorom pre celú spoločnosť.</p>
+					<p>Článok 6<br />Poľovník chápe zver ako neoddeliteľnú súčasť prírody a nenahraditeľný, trvalo udržateľný zdroj prírody.</p>
+					<p>Článok 7<br />Poľovník preukazuje zveri úctu, ktorú si zaslúži, stará sa o ňu, chráni ju a ctí zodpovednosť za starostlivosť o ňu.</p>
+					<p>Článok 8<br />Poľovník chápe účasť na love ako česť, ktorej sa mu dostalo od prírody a podľa toho sa na love správa.</p>
+					<p>Článok 9<br />Poľovníkovi neslúži zver len ako terč a pri love ho nemotivujú iba ekonomické aspekty alebo zdroj streleckej zábavy.</p>
+					<p>Článok 10<br />Poľovník pri svojej činnosti spolupracuje s ostatnými členmi komory, domácimi a zahraničnými poľovníckymi spoločnosťami.</p>
+				</div>
+			</div>
+			-->
+			
+			<!--<a class="pull-right" href="#carousel-example-generic">Nahor</a>-->
+			</br>
+			</br>
+		</div>
+		<!--/stlpec vpravo-------------------------------------- - -->
+</div>
+</div>

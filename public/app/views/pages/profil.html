@@ -1,0 +1,77 @@
+
+
+<div ng-if="main.loggedIn" ng-controller="ProfilController as profil">
+			<h2>{{profil.profilRecord[2].p2}}</h2>
+			<h4 style="margin-top: -15px;">Môj Profil</h4>
+			</br>
+			</br>
+
+		
+
+
+			<div>
+			<table class="table table-hover table-condensed">
+				<thead>
+				  <tr>
+				  	<!--<th hidden>ID</th>-->
+					<th></th>
+					<th></th>
+					<th></th>
+				  </tr>
+				</thead>
+				<tbody>
+					<tr ng-show="$index != selectedRow" ng-repeat-start="each in profil.profilRecord">
+						   <td>{{each.p1}}</td>
+						   <td><strong>{{each.p2}}</strong></td>
+						   <td>
+								<button ng-disabled="each.p3" class="btn" ng-click="profil.setClickedRow($index, each)">
+									<span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Edit
+								</button>
+						   </td>
+					</tr>
+				 	<tr ng-repeat-end="" ng-show="$index == selectedRow">
+						   <td>{{each.p1}}</td>
+						   <td><input id="znackaInput" class="form-control input-sm" ng-model="profil.znackaSelected"></td>
+						   <td>
+								<button class="btn" ng-click="profil.save(each)">
+									<span class="glyphicon glyphicon-saved"></span>&nbsp;&nbsp;Ulož
+								</button>
+						   </td>
+					</tr>
+					   
+				</tbody>
+			</table>
+			</div>
+
+
+			<!-- NOVE HESLO -->
+			<table class="table">
+				<thead>
+				  <tr>
+					<th></th>
+					<th></th>
+					<th></th>
+				  </tr>
+				</thead>
+				<tbody>
+					<tr ng-if="!profil.hesloEdit">
+						   <td><strong>Nové heslo:</strong> </td> 
+						   <td></td> 
+						   <td>
+								<button disabled class="btn" ng-click="profil.hesloEdit=!profil.hesloEdit">
+									<span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Edit
+								</button>
+						   </td>
+					</tr>	
+					<tr ng-if="profil.hesloEdit">
+						   <td><strong>Zadaj nové heslo:</strong> </td> 
+						   <td><input id="znackaInput" class="form-control input-sm" ng-model="profil.noveHeslo"></td> 
+						   <td>
+								<button class="btn" ng-click="profil.zmenHeslo()">
+									<span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Edit
+								</button>
+						   </td>
+					</tr>		   
+				</tbody>
+			</table>
+</div>

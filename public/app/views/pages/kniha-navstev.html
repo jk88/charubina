@@ -1,0 +1,257 @@
+﻿
+
+<div ng-if="main.loggedIn" ng-controller="NavstevyController as navstevy">
+				<h2 id="topkniha">Kniha návštev</h2>
+				<button ng-if="navstevy.loggedAdmin" type="button" class="btn btn-primary" data-toggle="collapse" data-target="#divformskryty1">Vlož oznam</button>
+
+				<button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#divformskryty">Pridaj záznam</button>
+
+
+				<button type="button" class="btn btn-primary" ng-click="navstevy.exportData()">Exportovať</button>
+
+
+				<form class="navbar-form pull-right" role="search">
+					<div class="form-group">
+						<input type="text" class="form-control" ng-model="uzivatelFilter" placeholder="Vyhľadaj">
+					</div>
+					<button type="reset" class="btn btn-default" ng-click="uzivatelFilter=''">Zruš</button>
+				</form>
+				</br>
+				</br>
+
+
+			<!-- vkladanie navstevy oznamy -->
+					<div id="divformskryty1" class="collapse">
+				
+					<form name="picaForm" class="form-horizontal" ng-submit="navstevy.createOznamyNavstevy()">
+					  <fieldset>
+						<div class="form-group">
+
+						  <label for="inputEmail" class="col-lg-2 control-label">Nadpis</label>
+						  <div class="col-lg-10">
+							<input type="text" class="form-control" id="inputEmail" ng-model="navstevy.oznamyNavstevyData.titulok" placeholder="Nadpis oznamu">
+
+						  </div>
+
+
+						  <label for="inputEmail" class="col-lg-2 control-label">Text</label>
+						  <div class="col-lg-10">	
+							<!--<textarea type="text" name="Text1" class="form-control" cols="40" ng-model="textH" rows="5" placeholder="Text oznamu"></textarea>-->
+							<!--<div text-angular ng-model="htmlVariable" ta-toolbar-class="btn-toolbar" ta-toolbar-group-class="btn-group" ta-toolbar-button-class="btn btn-default" ta-toolbar-button-active-class="active" placeholder="Text oznamu"></div>-->
+
+
+							<!--<div text-angular ta-target-toolbars="toolbar" ng-model="main.oznamyData.text"></div>
+							<div text-angular-toolbar class="toolbar" name="toolbar"></div>-->
+
+							 <div text-angular="text-angular" ng-model="navstevy.oznamyNavstevyData.text" ta-toolbar="
+							 [['h1','h2', 'h3', 'bold','underline','italics', 'p','ul','ol', 'justifyLeft', 'justifyCenter', 'justifyRight', 'quote', 'insertImage','insertLink','html']]">
+							 </div>
+
+
+						  </div>	
+						  </div>			 
+					
+						
+						<div class="form-group">
+						  <div class="col-lg-10 col-lg-offset-2">
+							<button type="reset" class="btn btn-default" ng-click="navstevy.oznamyDataNavstevy.text=''">Vymaž</button>
+							<button type="submit" class="btn btn-primary" data-toggle="collapse" data-target="#divformskryty1">Potvrď</button>
+						  </div>
+						</div>
+					  </fieldset>
+					</form>
+					</div>
+				<!-- vkladanie navstevy oznamy koniec -->
+
+
+			<div class="col-md-3"></div>
+			<div class="col-md-6">
+
+
+				<div id="divformskryty" class="collapse">
+				</br>
+				<form name="picaForm" class="form-horizontal" ng-submit="navstevy.createNavstevy()">
+				  <fieldset>
+					<div class="form-group">
+					  <label for="inputEmail" class="col-lg-4 control-label">Lokalita </label>
+					  <div class="col-lg-8">
+						<input type="text" class="form-control" id="inputEmail" ng-model="navstevy.navstevyData.lokalita" placeholder="Lokalita">
+					  </div>
+
+					  <label for="inputEmail" class="col-lg-4 control-label">Čas</label>
+					  <div class="col-lg-8">
+						<input datetime-picker date-format="yyyy-MM-dd HH:mm" ng-model="navstevy.navstevyData.prichod" placeholder="Príchod">
+					  </div>
+
+					  <!-- skace to jak pica dunno why <label for="inputEmail" class="col-lg-4 control-label">Odchod</label>-->
+					  <div class="col-lg-8">
+						<input datetime-picker date-format="yyyy-MM-dd HH:mm" ng-model="navstevy.navstevyData.odchod" placeholder="Odchod">
+					  </div>
+					</div>
+					
+					<div class="form-group">
+					  <div class="col-lg-10 col-lg-offset-2">
+						<button type="reset" class="btn btn-default">Vymaž</button>
+						<button type="submit" class="btn btn-primary" data-toggle="collapse" data-target="#divformskryty">Potvrď</button>
+					  </div>
+					</div>
+				  </fieldset>
+				</form>
+				</div>
+			</div>
+			
+			
+			<div class="col-md-3"></div>
+
+			<div class="panel-heading">
+			</div>
+			<div class="panel-body">
+				<p></p>
+			</div>
+			
+			<!--<div>
+				<p> loggedAdmin={{  navstevy.loggedAdmin }}
+			</div>-->
+
+			<!-- ng repeat oznamy navstevy -->
+				<div class="panel panel-default" ng-show="$index != selectedRowNavstevy" ng-repeat-start="each in navstevy.oznamyNavstevies | reverse">
+					<div class="panel-heading">{{each.titulok}}
+						<button class="btn btn-xs pull-right" ng-if="navstevy.loggedAdmin" ng-click="navstevy.setClickedRowNavstevy($index, each)">
+							<span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Edit
+						</button>
+						<div class="pull-right">&nbsp;</div>
+						<button class="btn btn-xs pull-right" ng-if="navstevy.loggedAdmin" ng-click="navstevy.vymazNavstevy($index, each)">
+							<span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Zmaž
+						</button>
+					</div>
+					<div class="panel-body">
+						<p ng-bind-html="each.text"></p>
+					</div>
+				</div>
+				<div ng-repeat-end="" ng-show="$index == selectedRowNavstevy">
+					<!-- ---------------------------- -->
+					<div class="panel panel-default">
+	  				<div class="panel-body">
+
+					<form name="picaForm" class="form-horizontal" ng-submit="navstevy.saveNavstevy(each)">
+					  <fieldset>
+						<div class="form-group">
+
+						  <label for="inputEmail" class="col-lg-2 control-label">Nadpis</label>
+						  <div class="col-lg-10">
+							<input type="text" class="form-control" id="inputEmail" ng-model="navstevy.casSelectedNavstevy" placeholder="Nadpis oznamu">
+						  </div>
+
+						  <label for="inputEmail" class="col-lg-2 control-label">Text</label>
+						  <div class="col-lg-10">	
+							<!--<div text-angular ta-target-toolbars="toolbar2" ng-model="main.lokalitaSelected"></div>
+							<div text-angular-toolbar class="toolbar" name="toolbar2"></div>-->
+							<div text-angular="text-angular" ng-model="navstevy.lokalitaSelectedNavstevy" ta-toolbar="
+							 [['h1','h2', 'h3', 'bold','underline','italics', 'p','ul','ol', 'justifyLeft', 'justifyCenter', 'justifyRight', 'quote', 'insertImage','insertLink','html']]">
+							 </div>	
+						  </div>	
+						  </div>			 
+						
+						<div class="form-group">
+						  <div class="col-lg-10 col-lg-offset-2">
+							<button type="reset" class="btn btn-default" ng-click="navstevy.zrusNavstevy()">Zruš</button>
+							<button type="submit" class="btn btn-primary">Potvrď</button>
+						  </div>
+						</div>
+
+
+					  </fieldset>
+					</form>
+
+					</div>
+					</div>
+					<!-- ---------------------------- -->
+				</div>
+			<!-- ng repeat oznamy navstevy koniec -->
+
+
+			</br>
+			</br>
+
+			<table class="table table-striped table-hover table-condensed">
+				<thead>
+				  <tr>
+				  	<th hidden>ID</th>
+					<th>Príchod</th>
+					<th>Odchod</th>
+					<th>Meno</th>
+					<th>Lokalita</th>
+					
+					<th ng-if="navstevy.loggedAdmin">Edit</th>
+				  </tr>
+				</thead>
+				<tbody>
+					<tr ng-show="$index != selectedRow" dir-paginate-start="each in navstevy.navstevies | filter:uzivatelFilter | orderBy:'prichod' | reverse | itemsPerPage: 10">
+						   <!--<td hidden>{{each._id}}</td>-->
+						   <td>{{each.prichod}}</td> 
+						   <td>{{each.odchod}}</td> 
+						   <td>{{each.uzivatelMeno}}</td>
+						   <td>{{each.lokalita}}</td>
+						  
+						   <td ng-if="navstevy.loggedAdmin">
+								<button class="btn" ng-click="navstevy.setClickedRow($index, each)">
+									<span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Edit
+								</button>
+								<button class="btn" ng-click="navstevy.setClickedRowVymaz($index, each)">
+									<span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;Zmaž
+								</button>
+						   </td>
+					</tr>
+					<tr dir-paginate-end="" ng-show="$index == selectedRow">
+						   <!--<td hidden>{{each._id}}</td>-->
+						   <td><!--<input id="casInput" class="form-control input-sm" ng-model="navstevy.prichodSelected">-->
+						   <input datetime-picker date-format="yyyy-MM-dd HH:mm" ng-model="navstevy.prichodSelected" />
+						   </td> 
+						   <td><!--<input id="casInput" class="form-control input-sm" ng-model="navstevy.odchodSelected">-->
+						   <input datetime-picker date-format="yyyy-MM-dd HH:mm" ng-model="navstevy.odchodSelected" />
+						   </td> 
+						   <td>{{each.uzivatelMeno}}</td>
+						   <td><input id="lokalitaInput" class="form-control input-sm" ng-model="navstevy.lokalitaSelected"></td>
+						  
+						   <td>
+								<button class="btn" ng-click="navstevy.save(each)">
+									<span class="glyphicon glyphicon-saved"></span>&nbsp;&nbsp;Ulož
+								</button>
+						   </td>
+					</tr>					   
+				</tbody>
+			</table>
+
+			<div class="container text-center"><dir-pagination-controls></dir-pagination-controls></div>
+
+
+			<div hidden id="exportable" style="display:none">
+			<table>
+				<thead>
+				  <tr>
+				  	<!--<th hidden>ID</th>-->
+					<th>Príchod</th>
+					<th>Odchod</th>
+					<th>Meno</th>
+					<th>Lokalita</th>
+					
+					<th ng-if="navstevy.loggedAdmin">Edit</th>
+				  </tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="each in navstevy.navstevies | orderBy:'prichod' | reverse">
+						   <td>{{each.prichod}}</td> 
+						   <td>{{each.odchod}}</td> 
+						   <td>{{each.uzivatelMeno}}</td>
+						   <td>{{each.lokalita}}</td>
+					</tr>				   
+				</tbody>
+			</table>
+			</div>
+
+
+		<!--<ul class="pager">
+			<li><a href="#">Späť</a></li>
+			<li><a href="#">Ďalej</a></li>
+		</ul>-->
+</div>
